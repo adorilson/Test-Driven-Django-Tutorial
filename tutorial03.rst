@@ -51,7 +51,7 @@ Create a new test method inside ``fts/tests.py``.
         # He clicks 'submit'
 
         # The page refreshes, and he sees that his choice
-        # has updated the results.  they now say
+        # has updated the results.  They now say
         # "100 %: very awesome".
 
         # The page also says "1 votes"
@@ -242,7 +242,7 @@ we look for the default 'no votes yet' message on the next page.
 
 Let's run that, and see where we get::
 
-    AssertionError: u'Page not found (404)' != 'PollsNoSuchElementException: Message: u'Unable to locate element: {"method":"tag name","selector":"h1"}' 
+    NoSuchElementException: Message: u'Unable to locate element: {"method":"tag name","selector":"h1"}'
 
 
 URLS and view functions, and the Django Test Client
