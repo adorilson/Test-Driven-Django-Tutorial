@@ -867,59 +867,17 @@ The templates don't include the hyperlinks yet. Let's add them:
       </body>
     </html>
 
-Notice the call to ``{% url %}``, which works almost exactly like ``reverse``.  Are our unit tests any happier?::
+Notice the call to ``{% url %}``, which works almost exactly like ``reverse``. Run the unit tests again::
 
-
-    ======================================================================
-    ERROR: test_root_url_shows_links_to_all_polls (polls.tests.HomePageViewTest)
+    21:08 ~/workspace/tddjango_site/source/mysite (master)$ python manage.py test polls 
+    Creating test database for alias 'default'...
+    ......
     ----------------------------------------------------------------------
-    Traceback (most recent call last):
-      File "/home/harry/workspace/mysite/polls/tests.py", line 99, in test_root_url_shows_links_to_all_polls
-        response = client.get('/')
-      File "/usr/local/lib/python2.7/dist-packages/django/test/client.py", line 439, in get
-        response = super(Client, self).get(path, data=data, **extra)
-      File "/usr/local/lib/python2.7/dist-packages/django/test/client.py", line 244, in get
-        return self.request(**r)
-      File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 111, in get_response
-        response = callback(request, *callback_args, **callback_kwargs)
-      File "/home/harry/workspace/mysite/polls/views.py", line 7, in home
-        return render(request, 'home.html', context)
-      File "/usr/local/lib/python2.7/dist-packages/django/shortcuts/__init__.py", line 44, in render
-        return HttpResponse(loader.render_to_string(*args, **kwargs),
-      File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 176, in render_to_string
-        return t.render(context_instance)
-      File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 140, in render
-        return self._render(context)
-      File "/usr/local/lib/python2.7/dist-packages/django/test/utils.py", line 62, in instrumented_test_render
-        return self.nodelist.render(context)
-      File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 823, in render
-        bit = self.render_node(node, context)
-      File "/usr/local/lib/python2.7/dist-packages/django/template/debug.py", line 74, in render_node
-        return node.render(context)
-      File "/usr/local/lib/python2.7/dist-packages/django/template/defaulttags.py", line 185, in render
-        nodelist.append(node.render(context))
-      File "/usr/local/lib/python2.7/dist-packages/django/template/defaulttags.py", line 411, in render
-        url = reverse(view_name, args=args, kwargs=kwargs, current_app=context.current_app)
-      File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 476, in reverse
-        return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
-      File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 363, in _reverse_with_prefix
-        possibilities = self.reverse_dict.getlist(lookup_view)
-      File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 276, in reverse_dict
-        self._populate()
-      File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 265, in _populate
-        lookups.appendlist(pattern.callback, (bits, p_pattern, pattern.default_args))
-      File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 216, in callback
-        self._callback = get_callable(self._callback_str)
-      File "/usr/local/lib/python2.7/dist-packages/django/utils/functional.py", line 27, in wrapper
-        result = func(*args)
-      File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 101, in get_callable
-        (lookup_view, mod_name))
-    ViewDoesNotExist: Could not import polls.views.poll. View does not exist in module polls.views.
+    Ran 6 tests in 0.012s
+    OK
 
-    ----------------------------------------------------------------------
-
-Phew. A long traceback, but basically all it's saying is that we need at least
-a placeholder for our new "poll" view in ``views.py``.  Let's add that now:
+What about the functional tests? If you run the functional tests, you get tracebacks for two errors, but basically
+all that we need at least a placeholder for our new "poll" view in ``views.py``.  Let's add that now:
 
 .. sourcecode:: python
     :filename: mysite/mysite/urls.py
@@ -932,16 +890,7 @@ a placeholder for our new "poll" view in ``views.py``.  Let's add that now:
     def poll():
         pass
 
-And run the unit tests again::
-
-    21:08 ~/workspace/tddjango_site/source/mysite (master)$ python manage.py test polls 
-    Creating test database for alias 'default'...
-    ......
-    ----------------------------------------------------------------------
-    Ran 6 tests in 0.012s
-    OK
-
-What about the functional tests?::
+What about the functional tests now?::
 
     NoSuchElementException: Message: u'Unable to locate element: {"method":"tag name","selector":"h1"}' 
 
