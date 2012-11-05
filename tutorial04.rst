@@ -542,7 +542,7 @@ So:
 
 And::
 
-    self.assertIn(choice3.choice, response.content)
+    self.assertIn(choice1.choice, response.content)
     AssertionError: 'PM' not found in '<html>\n  <body>\n    <h1>Poll Results</h1>\n\n    <h2>6 times 7</h2>\n    <p>No-one has voted on this poll yet</p>\n  </body>\n</html>\n\n'
 
 
@@ -568,7 +568,7 @@ So, in ``polls/templates/poll.html``:
 
 And re-running the tests - oh, a surprise!::
 
-    self.assertIn(choice4.choice, response.content)
+    self.assertIn(choice2.choice, response.content)
     AssertionError: "Gardener's" not found in '<html>\n  <body>\n    <h1>Poll Results</h1>\n    \n    <h2>time</h2>\n\n    <p>No-one has voted on this poll yet</p>\n\n    <h3>Add your vote</h3>\n    <p><label for="id_vote_0">Vote:</label> <ul>\n<li><label for="id_vote_0"><input type="radio" id="id_vote_0" value="3" name="vote" /> PM</label></li>\n<li><label for="id_vote_1"><input type="radio" id="id_vote_1" value="4" name="vote" /> Gardener&#39;s</label></li>\n</ul></p>\n\n    \n  </body>\n</html>\n'
 
 Django has converted an apostrophe (``'``) into an html-compliant ``&#39;`` for
