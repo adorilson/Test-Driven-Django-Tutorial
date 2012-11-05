@@ -53,11 +53,7 @@ Let's start by extending our FT, to show Herbert voting on a poll. In
         # The buttons have labels to explain them
         choice_labels = self.browser.find_elements_by_tag_name('label')
         choices_text = [c.text for c in choice_labels]
-        self.assertEquals(choices_text, [
-            'Very awesome',
-            'Quite awesome',
-            'Moderately awesome',
-        ])
+        self.assertEquals(choices_text, POLL1.choices)
         # He decided to select "very awesome", which is answer #1
         chosen = self.browser.find_element_by_css_selector(
                 "input[value='1']"
@@ -632,13 +628,8 @@ do any harm, for now maybe it's easiest to just change the FT:
         # The buttons have labels to explain them
         choice_labels = choice_inputs = self.browser.find_elements_by_tag_name('label')
         choices_text = [c.text for c in choice_labels]
-        self.assertEquals(choices_text, [
-            'Vote:', # this label is auto-generated for the whole form
-            'Very awesome',
-            'Quite awesome',
-            'Moderately awesome',
-        ])
-
+        # this 'Vote:' label is auto-generated for the whole form
+        self.assertEquals(choices_text, ['Vote:'] + POLL1.choices)
 
 The FT should now get a little further::
 
