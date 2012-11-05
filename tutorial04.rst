@@ -146,6 +146,12 @@ Again, a minimal fix:
     def poll(request, poll_id):
         return HttpResponse()
 
+Don't forget add the following import, if you have erase previously:
+.. sourcecode:: python
+    :filename: mysite/polls/views.py
+
+    from django.http import HttpResponse
+
 Now we get this error::
 
     AssertionError: No templates used to render the response
